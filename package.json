@@ -10,13 +10,13 @@
     "cy:spec1": "cypress run --spec 'cypress/integration/bookTicket.spec.js' --record --key eec90106-4ead-43fe-aa78-1179e357a5ab",
     "cy:spec2": "cypress run --spec 'cypress/integration/enterSite.spec.js' --record --key eec90106-4ead-43fe-aa78-1179e357a5ab",
     "cy:spec3": "cypress run --spec 'cypress/integration/logAsAdmin.spec.js' --record --key eec90106-4ead-43fe-aa78-1179e357a5ab",
-    "cy:parallel": "npm run cy:spec1 --browser chrome --group Spec1 --ci-build-id 1 & npm run cy:spec2 --browser chrome --group Spec2 --ci-build-id 1"
+    "cy:parallel": "npm run cy:spec1 --browser chrome --group Spec1 --ci-build-id 1 & npm run cy:spec2 --browser chrome --group Spec2 --ci-build-id 1 & npm run cy:spec3 --browser chrome --group Spec3 --ci-build-id 1",
+    "cy:jenkins": "npm cypress run --spec 'cypress/integration/logAsAdmin.spec.js' & npm cypress run --spec 'cypress/integration/bookTicket.spec.js'"
   },
   "author": "Vasilyuk E.N.",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^9.3.0",
-    "install": "^0.13.0",
     "npm": "^8.16.0"
   }
 }
