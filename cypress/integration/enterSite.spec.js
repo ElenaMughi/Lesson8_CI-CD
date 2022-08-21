@@ -1,21 +1,37 @@
 describe("SiteVisible", () => {
-  it("Should be enter to site", () => {
+  beforeEach(() => {
     cy.visit("http://qamid.tmweb.ru");
-    cy.get(".page-nav__day_today").next().click();
-    cy.get(".movie-seances__time").first().click();
-    cy.get(".acceptin-button").should("be.disabled");
-    //   const seats = require("../fixtures/example.json");
-    cy.fixture("example.json").then((seats) => {
-      seats.forEach((place) => {
-        cy.get(
-          `.buying-scheme__wrapper > :nth-child(${place.row}) > :nth-child(${place.seat})`
-        ).click();
-      });
+  });
+
+  it("Should be enter to site", () => {
+    cy.fixture("selector.json").then((selector) => {
+      cy.get(selector[3].title).should("have.text", "Идёмвкино");
     });
-    cy.get(".acceptin-button").should("not.be.disabled").click();
-    cy.get(".acceptin-button").should("be.visible").and("not.be.disabled");
-    cy.get(":nth-child(2) > .ticket__details").then(($el) => {
-      cy.log($el[0].textContent);
+  });
+
+  it("Should be all week", () => {
+    var date = new Date();
+    var now = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"][date.getDay()];
+    var now2 = new Date().getDate();
+
+    cy.fixture("selector.json").then((selector) => {
+      cy.get(selector[4].week).first().should("have.text", now);
+      cy.get(selector[5].day).first().should("have.text", now2);
+
+      cy.get(selector[6].allday).should("have.length", 7);
+    });
+  });
+
+  it("Should be films", () => {
+    cy.fixture("selector.json").then((selector) => {
+      cy.get(selector[7].today).click();
+
+      cy.get(selector[8].logan1).should("have.text", "Логан");
+      cy.get(selector[9].logan2).should("have.text", "Россомаха");
+
+      cy.get(selector[10].film31).should("have.text", "Фильм 3");
+      cy.get(selector[11].film32).should("have.text", "лучший фильм");
     });
   });
 });
+
